@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGODB_DATABASE_URL")
+}
+
+model User {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  userName      String? @unique
+  bio           String?
+  email         String  @unique
+  hasedPassword String?
+
+  emailVerified DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  image        String?
+  coverImage   String?
+  profileImage String?
+
+  followingIds     String[] @db.ObjectId
+  hasNotifications Boolean?
+
+  posts         Post[]
+  coments       Comment[]
+  notifications Notification[]
+}
+
+model Post {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  body    String
+  userId  String   @db.ObjectId
+  likeIds String[] @db.ObjectId
+
+  retweetIds String[] @db.ObjectId
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  coments Comment[] //each post will contain an array of comments.
+}
+
+model Comment {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  body   String
+  userId String @db.ObjectId
+  postId String @db.ObjectId
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
+
+model Notification {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  body   String
+  userId String @db.ObjectId
+
+  createdAt DateTime @default(now())
+
+  User User @relation(fields: [userId], references: [id])
+}
