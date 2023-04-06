@@ -1,9 +1,11 @@
 import React from "react";
 import { ClipLoader } from "react-spinners";
+import { useRouter } from "next/router";
 
 import useFollowingPosts from "@/hooks/useFollowingPosts";
 
 import PostItem from "./PostItem";
+import Button from "../Button";
 
 interface FollowigPostFeedProps {
   userId: string;
@@ -15,6 +17,7 @@ const FollowigPostFeed: React.FC<FollowigPostFeedProps> = ({
   isActive,
 }) => {
   const { data: followingPosts = [], isLoading } = useFollowingPosts(userId);
+  const router = useRouter();
 
   if (isLoading) {
     return (
@@ -39,6 +42,12 @@ const FollowigPostFeed: React.FC<FollowigPostFeedProps> = ({
                   Find some people and topics to follow now.
                 </span>
               </div>
+              <Button
+                label="Let's go"
+                onClick={() => router.push("/connect")}
+                large
+                fullWidth
+              />
             </>
           )}
         </div>
