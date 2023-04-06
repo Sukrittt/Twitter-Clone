@@ -21,6 +21,11 @@ const NavUserDetails: React.FC<NavUserDetailsProps> = ({ userLoggedIn }) => {
     }
   };
 
+  const visitProfileFollowCount = (type: string) => {
+    router.push(`/users/${type}/${currentUser?.id}`);
+    navigationModal.onClose();
+  };
+
   const { data: currentUser } = useUser(userLoggedIn?.id as string);
 
   return (
@@ -40,11 +45,17 @@ const NavUserDetails: React.FC<NavUserDetailsProps> = ({ userLoggedIn }) => {
         </div>
       </div>
       <div className="flex gap-5 mt-3 text-sm">
-        <div className="flex gap-1">
+        <div
+          className="flex gap-1"
+          onClick={() => visitProfileFollowCount("following")}
+        >
           <p className="text-white">{currentUser?.followingIds?.length}</p>
           <p className="text-neutral-500">Following</p>
         </div>
-        <div className="flex gap-1">
+        <div
+          className="flex gap-1"
+          onClick={() => visitProfileFollowCount("followers")}
+        >
           <p className="text-white">{currentUser?.userFollowersCount || 0}</p>
           <p className="text-neutral-500">Followers</p>
         </div>
