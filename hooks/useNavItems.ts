@@ -21,7 +21,7 @@ const useNavItems = () => {
     },
     {
       label: "Profile",
-      href: "/users/123",
+      href: `/users/${userLoggedIn?.id}`,
       icon: FaRegUser,
       requiredAuth: true, //authentication required
     },
