@@ -23,11 +23,7 @@ const Sidebar = () => {
             <SidebarItem
               key={item.href}
               label={item.label}
-              href={
-                item.label === "Profile"
-                  ? `/users/${userLoggedIn?.id}`
-                  : item.href
-              }
+              href={item.href}
               icon={item.icon}
               alert={item.alert}
               requiredAuth={item.requiredAuth}
