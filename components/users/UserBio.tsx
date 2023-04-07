@@ -55,7 +55,7 @@ const UserBio: React.FC<UserBioProps> = ({ userId }) => {
         </div>
         <div className="flex flex-col mt-4">
           <p className="text-white">{visitedUser?.bio}</p>
-          <div className="flex gap-3 text-sm">
+          <div className="flex gap-2 lg:gap-3 text-sm flex-wrap">
             {visitedUser?.location && (
               <div className="flex flex-row items-center gap-1 mt-4 text-neutral-500">
                 <GoLocation size={19} />
