@@ -21,6 +21,8 @@ const EditModal = () => {
   const [bio, setBio] = useState("");
   const [profileImage, setProfileImage] = useState("");
   const [coverImage, setCoverImage] = useState("");
+  const [location, setLocation] = useState("");
+  const [website, setWebsite] = useState("");
 
   //initializing existing fields
   useEffect(() => {
@@ -29,13 +31,16 @@ const EditModal = () => {
     setBio(userLoggedIn?.bio);
     setCoverImage(userLoggedIn?.coverImage);
     setProfileImage(userLoggedIn?.profileImage);
+    setLocation(userLoggedIn?.location);
+    setWebsite(userLoggedIn?.website);
   }, [
     userLoggedIn?.name,
     userLoggedIn?.userName,
     userLoggedIn?.bio,
-    userLoggedIn?.location,
     userLoggedIn?.coverImage,
     userLoggedIn?.profileImage,
+    userLoggedIn?.location,
+    userLoggedIn?.website,
   ]);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -65,6 +70,8 @@ const EditModal = () => {
         bio,
         profileImage,
         coverImage,
+        website,
+        location,
       });
 
       mutateFetchedUser(); //update the data
@@ -85,6 +92,8 @@ const EditModal = () => {
     coverImage,
     mutateFetchedUser,
     editModal,
+    website,
+    location,
   ]);
 
   const bodyContent = (
@@ -119,6 +128,18 @@ const EditModal = () => {
         value={bio}
         isDisbaled={isLoading}
       />
+      <Input
+        placeholder="Location"
+        onChange={(e) => setLocation(e.target.value)}
+        value={location}
+        isDisbaled={isLoading}
+      />
+      <Input
+        placeholder="Website"
+        onChange={(e) => setWebsite(e.target.value)}
+        value={website}
+        isDisbaled={isLoading}
+      />
     </div>
   );
 
@@ -131,6 +152,7 @@ const EditModal = () => {
       onClose={editModal.onClose}
       onSubmit={onSubmit}
       body={bodyContent}
+      editModal
     />
   );
 };

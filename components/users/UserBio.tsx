@@ -1,6 +1,8 @@
 import React, { useMemo } from "react";
 import { format } from "date-fns";
 import { BiCalendar } from "react-icons/bi";
+import { GoLocation } from "react-icons/go";
+import { AiOutlinePaperClip } from "react-icons/ai";
 
 import useUser from "@/hooks/useUser";
 import useCurrentUser from "@/hooks/useCurrentUser";
@@ -53,13 +55,33 @@ const UserBio: React.FC<UserBioProps> = ({ userId }) => {
         </div>
         <div className="flex flex-col mt-4">
           <p className="text-white">{visitedUser?.bio}</p>
-          <div className="flex flex-row items-center gap-2 mt-4 text-neutral-500">
-            <BiCalendar size={24} />
-            <p>Joined {createdAt}</p>
+          <div className="flex gap-3 text-sm">
+            {visitedUser?.location && (
+              <div className="flex flex-row items-center gap-1 mt-4 text-neutral-500">
+                <GoLocation size={19} />
+                <p>{visitedUser?.location}</p>
+              </div>
+            )}
+            {visitedUser?.website && (
+              <div className="flex flex-row items-center gap-1 mt-4 text-neutral-500">
+                <AiOutlinePaperClip size={22} />
+                <a
+                  className="text-sky-500 hover:underline transition"
+                  href={visitedUser?.website}
+                  target="_blank"
+                >
+                  {visitedUser?.website}
+                </a>
+              </div>
+            )}
+            <div className="flex flex-row items-center gap-1 mt-4 text-neutral-500">
+              <BiCalendar size={22} />
+              <p>Joined {createdAt}</p>
+            </div>
           </div>
         </div>
         <div className="flex flex-row items-center mt-4 gap-6">
-          <div className="flex flex-row items-center gap-1">
+          <div className="flex flex-row items-center gap-1 text-sm">
             <p className="text-white">{visitedUser?.followingIds?.length}</p>
             <p
               onClick={() => router.push(`/users/following/${visitedUser?.id}`)}
@@ -68,7 +90,7 @@ const UserBio: React.FC<UserBioProps> = ({ userId }) => {
               Following
             </p>
           </div>
-          <div className="flex flex-row items-center gap-1">
+          <div className="flex flex-row items-center gap-1 text-sm">
             <p className="text-white">{visitedUser?.userFollowersCount || 0}</p>
             <p
               onClick={() => router.push(`/users/followers/${visitedUser?.id}`)}

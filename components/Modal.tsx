@@ -12,6 +12,7 @@ interface ModalProps {
   footer?: React.ReactElement; //expects a valid React element
   actionLabel: string;
   disabled?: boolean;
+  editModal?: boolean;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -23,6 +24,7 @@ const Modal: React.FC<ModalProps> = ({
   footer,
   actionLabel,
   disabled,
+  editModal,
 }) => {
   //if button is not disabled then call these function.
   //disabled = true indicates that something in running and it is not yet finished.
@@ -47,7 +49,11 @@ const Modal: React.FC<ModalProps> = ({
         className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 outline-none z-50
                     focus:outline-none bg-neutral-800/70"
       >
-        <div className="relative w-full lg:w-3/6 lg:mt-[5vh] mx-auto lg:max-w-3xl lg:h-auto h-full overflow-y-hidden">
+        <div
+          className={`relative w-full lg:w-3/6 ${
+            editModal && "lg:mt-[37vh]"
+          } mx-auto lg:max-w-3xl lg:h-auto h-full overflow-y-hidden`}
+        >
           {/* Content */}
           <div className="h-full lg:h-auto border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-black outline:none focus:outline-none overflow-y-scroll lg:overflow-y-auto">
             {/* Header */}
