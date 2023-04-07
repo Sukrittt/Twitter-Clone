@@ -13,12 +13,14 @@ import EditModal from "@/components/modals/EditModal";
 import NavigationModal from "@/components/modals/NavigationModal";
 import TweetModal from "@/components/modals/TweetModal";
 import DeleteModal from "@/components/modals/DeleteModal";
+import LoadingScreen from "@/components/LoadingScreen";
 
 export default function App({ Component, pageProps }: AppProps) {
   const deleteProps = useDeleteProps();
 
   return (
     <SessionProvider session={pageProps.session}>
+      <LoadingScreen />
       <Toaster />
       <DeleteModal type={deleteProps.type} commentId={deleteProps.id} />
       <TweetModal />
