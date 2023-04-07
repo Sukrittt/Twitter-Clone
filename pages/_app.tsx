@@ -1,7 +1,6 @@
 import type { AppProps } from "next/app";
 import { Toaster } from "react-hot-toast";
 import { SessionProvider } from "next-auth/react";
-import GoogleAnalytics from "@bradgarropy/next-google-analytics";
 
 import "@/styles/globals.css";
 
@@ -30,7 +29,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
-      <GoogleAnalytics measurementId="G-08LTBHB7T8" />
     </SessionProvider>
   );
 }
