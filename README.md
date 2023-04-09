@@ -21,7 +21,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Tailwind CSS
 
 ### Authentication 🔐
-- Next.auth
+- Next Auth
 
 ### API Calls 📞
 - Axios
