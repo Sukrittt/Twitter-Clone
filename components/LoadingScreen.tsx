@@ -12,7 +12,7 @@ const LoadingScreen = () => {
 
   return (
     <>
-      {!loading && (
+      {loading && (
         <div className="absolute h-full w-full grid place-items-center text-sky-500 bg-black z-50 overflow-hidden">
           <BsTwitter size={70} />
         </div>
