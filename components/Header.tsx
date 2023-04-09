@@ -27,7 +27,11 @@ const Header: React.FC<HeaderProps> = ({
 
   const { data: userLoggedIn } = useCurrentUser();
   const { data: userPosts = [] } = usePosts(userId);
-  const { data: userRetweets = [] } = useGetTweets(userLoggedIn?.id);
+  let { data: userRetweets = [] } = useGetTweets(userLoggedIn?.id);
+
+  userRetweets = userRetweets.filter(
+    (tweet: Record<string, any>) => tweet.userId != userId
+  );
 
   const navigationModal = useNavigationModal();
   const loginModal = useLoginModal();
