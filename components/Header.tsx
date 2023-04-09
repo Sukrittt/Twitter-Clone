@@ -27,11 +27,6 @@ const Header: React.FC<HeaderProps> = ({
 
   const { data: userLoggedIn } = useCurrentUser();
   const { data: userPosts = [] } = usePosts(userId);
-  let { data: userRetweets = [] } = useGetTweets(userLoggedIn?.id);
-
-  userRetweets = userRetweets.filter(
-    (tweet: Record<string, any>) => tweet.userId != userId
-  );
 
   const navigationModal = useNavigationModal();
   const loginModal = useLoginModal();
@@ -72,7 +67,7 @@ const Header: React.FC<HeaderProps> = ({
             <h1 className="text-white text-xl font-semibold">{label}</h1>
             {userId && (
               <span className="text-neutral-500 text-[.8em]">
-                {userPosts?.length + userRetweets?.length} Tweets
+                {userPosts?.length} Tweets
               </span>
             )}
             {userName && (
