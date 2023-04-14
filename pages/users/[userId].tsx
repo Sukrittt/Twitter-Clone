@@ -39,7 +39,7 @@ const UserProfile = () => {
 
   if (isLoading || !fetchedUser) {
     return (
-      <div className="flex justify-center items-center h-full">
+      <div className="grid place-items-center h-full mt-[45vh]">
         <ClipLoader color="lightblue" size={50} />
       </div>
     );
