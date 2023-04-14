@@ -1,6 +1,8 @@
 import type { AppProps } from "next/app";
 import { Toaster } from "react-hot-toast";
 import { SessionProvider } from "next-auth/react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useRouter } from "next/router";
 
 import "@/styles/globals.css";
 
@@ -17,6 +19,7 @@ import LoadingScreen from "@/components/LoadingScreen";
 
 export default function App({ Component, pageProps }: AppProps) {
   const deleteProps = useDeleteProps();
+  const router = useRouter();
 
   return (
     <SessionProvider session={pageProps.session}>
@@ -29,7 +32,25 @@ export default function App({ Component, pageProps }: AppProps) {
       <RegisterModal />
       <LoginModal />
       <Layout>
-        <Component {...pageProps} />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={router.route}
+            initial="initialState"
+            animate="animateState"
+            exit="exitState"
+            variants={{
+              initialState: {
+                opacity: 0,
+              },
+              animateState: {
+                opacity: 1,
+              },
+              exitState: {},
+            }}
+          >
+            <Component {...pageProps} />
+          </motion.div>
+        </AnimatePresence>
       </Layout>
     </SessionProvider>
   );
