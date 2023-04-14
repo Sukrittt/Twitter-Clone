@@ -32,7 +32,10 @@ const FollowItem: React.FC<FollowItemProps> = ({ user }) => {
   const router = useRouter();
 
   return (
-    <div className="p-4 flex gap-4 justify-between hover:bg-neutral-900/50 transition cursor-pointer">
+    <div
+      onClick={() => router.push(`/users/${user?.id}`)}
+      className="p-4 flex gap-4 justify-between hover:bg-neutral-900/50 transition cursor-pointer"
+    >
       <div className="flex gap-4">
         <Avatar userId={user?.id} homePage />
         <div className="flex flex-col">
