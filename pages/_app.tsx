@@ -23,35 +23,36 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <SessionProvider session={pageProps.session}>
-      <LoadingScreen />
-      <Toaster />
-      <DeleteModal type={deleteProps.type} commentId={deleteProps.id} />
-      <TweetModal />
-      <NavigationModal />
-      <EditModal />
-      <RegisterModal />
-      <LoginModal />
-      <Layout>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={router.route}
-            initial="initialState"
-            animate="animateState"
-            exit="exitState"
-            variants={{
-              initialState: {
-                opacity: 0,
-              },
-              animateState: {
-                opacity: 1,
-              },
-              exitState: {},
-            }}
-          >
-            <Component {...pageProps} />
-          </motion.div>
-        </AnimatePresence>
-      </Layout>
+      <LoadingScreen>
+        <Toaster />
+        <DeleteModal type={deleteProps.type} commentId={deleteProps.id} />
+        <TweetModal />
+        <NavigationModal />
+        <EditModal />
+        <RegisterModal />
+        <LoginModal />
+        <Layout>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={router.route}
+              initial="initialState"
+              animate="animateState"
+              exit="exitState"
+              variants={{
+                initialState: {
+                  opacity: 0,
+                },
+                animateState: {
+                  opacity: 1,
+                },
+                exitState: {},
+              }}
+            >
+              <Component {...pageProps} />
+            </motion.div>
+          </AnimatePresence>
+        </Layout>
+      </LoadingScreen>
     </SessionProvider>
   );
 }
